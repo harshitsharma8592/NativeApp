@@ -39,4 +39,17 @@ const updatePaymentStatus = async (req, res) => {
   }
 };
 
-module.exports = { submitMarketingHelp, updatePaymentStatus };
+
+// Fetch all submitted marketing help requests
+const getMarketingHelpRequests = async (req, res) => {
+  try {
+    const requests = await MarketingHelp.find().sort({ createdAt: -1 });
+    res.json(requests);
+  } catch (error) {
+    res.status(500).json({ error: "Error fetching requests" });
+  }
+};
+
+
+
+module.exports = { submitMarketingHelp, updatePaymentStatus, getMarketingHelpRequests };

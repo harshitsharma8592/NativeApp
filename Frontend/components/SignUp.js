@@ -21,7 +21,7 @@ function SignUp({ navigation }) {
     }
   
     try {
-      const response = await fetch('http://192.168.98.89:5000/api/auth/signup', {
+      const response = await fetch('http://192.168.0.188:5000/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

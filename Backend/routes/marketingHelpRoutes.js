@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
-const { submitMarketingHelp, updatePaymentStatus } = require('../controllers/marketingHelpController');
+const { submitMarketingHelp, updatePaymentStatus,getMarketingHelpRequests } = require('../controllers/marketingHelpController');
 
 const router = express.Router();
 
@@ -19,6 +19,8 @@ const upload = multer({ storage });
 
 // POST route for submitting marketing help requests
 router.post('/', upload.single('image'), submitMarketingHelp);
+
+router.get("/", getMarketingHelpRequests);
 
 // PATCH route to update payment status
 router.patch('/:id/payment', updatePaymentStatus);

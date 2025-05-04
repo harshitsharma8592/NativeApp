@@ -10,7 +10,7 @@ const PaymentScreen = ({ route }) => {
   const handlePayment = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://192.168.98.89:5000/api/marketingHelp/${requestId}/payment`, {
+      const response = await fetch(`http://192.168.0.188:5000/api/marketingHelp/${requestId}/payment`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ paymentStatus: "Completed" }),
@@ -19,7 +19,7 @@ const PaymentScreen = ({ route }) => {
       if (!response.ok) throw new Error("Payment Failed");
 
       Alert.alert("Success", "Payment Successful!");
-      navigation.navigate("HomeScreen"); // Navigate back to Home
+      navigation.navigate("HomePage"); // Navigate back to Home
 
     } catch (error) {
       Alert.alert("Error", error.message || "Payment Failed. Try again.");

@@ -33,11 +33,18 @@ const HomePage = ({ navigation }) => {
   }, [navigation]);
 
   const options = [
-    { title: 'Query Nest', color: '#4CAF50', screen: 'GeneralHelp' },
-    { title: 'Marketing Help', color: '#2196F3', screen: 'MarketingScreen' },
-    { title: 'Lost and Found', color: '#FF9800', screen: 'LostAndFoundScreen' },
-    { title: 'View Requests', color: '#FF6347', screen: 'SubmittedRequestPage' },
-    { title: 'View Lost & Found', color: '#FF5733', screen: 'ViewLostAndFoundScreen' }
+    [
+      { title: 'Query Nest', color: '#4CAF50', screen: 'GeneralHelp' },
+      { title: 'View Requests', color: '#4CAF50', screen: 'SubmittedRequestPage' }
+    ],
+    [
+      { title: 'Lost and Found', color: '#FF9800', screen: 'LostAndFoundScreen' },
+      { title: 'View Lost & Found', color: '#FF9800', screen: 'ViewLostAndFoundScreen' }
+    ],
+    [
+      { title: 'Marketing Help', color: '#673AB7', screen: 'MarketingScreen' },
+      { title: 'View Marketing Requests', color: '#673AB7', screen: 'MarketingRequestsScreen' }
+    ]
   ];
 
   return (
@@ -48,21 +55,19 @@ const HomePage = ({ navigation }) => {
       <View style={styles.overlay}>
         <Text style={styles.header}>Home Page</Text>
 
-        {/* Grid Layout for Buttons */}
-        <FlatList
-          data={options}
-          numColumns={2}
-          keyExtractor={(item) => item.title}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={[styles.optionButton, { backgroundColor: item.color }]}
-              onPress={() => navigation.navigate(item.screen)}
-            >
-              <Text style={styles.optionText}>{item.title}</Text>
-            </TouchableOpacity>
-          )}
-          columnWrapperStyle={styles.row}
-        />
+        {options.map((row, rowIndex) => (
+          <View key={rowIndex} style={styles.row}>
+            {row.map((item) => (
+              <TouchableOpacity
+                key={item.title}
+                style={[styles.optionButton, { backgroundColor: item.color }]}
+                onPress={() => navigation.navigate(item.screen)}
+              >
+                <Text style={styles.optionText}>{item.title}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        ))}
 
         {/* Logout Button */}
         <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
@@ -84,7 +89,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: 'rgba(0, 0, 0, 0.3)', // Reduced darkness for better visibility
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
   },
   header: {
     fontSize: 34,
@@ -96,6 +101,7 @@ const styles = StyleSheet.create({
     textShadowRadius: 5,
   },
   row: {
+    flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
     marginBottom: 10,
@@ -107,7 +113,6 @@ const styles = StyleSheet.create({
     margin: 8,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.25)', // Softer background
     borderWidth: 2,
     borderColor: 'rgba(255, 255, 255, 0.6)', 
     shadowColor: '#000',
@@ -146,6 +151,5 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
 });
-
 
 export default HomePage;

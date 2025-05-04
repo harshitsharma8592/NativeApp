@@ -45,7 +45,7 @@ const MarketingHelpForm = () => {
     });
 
     try {
-      const response = await fetch("http://192.168.98.89:5000/api/marketingHelp", {
+      const response = await fetch("http://192.168.0.188:5000/api/marketingHelp", {
         method: "POST",
         body: formData,
         headers: { "Content-Type": "multipart/form-data" },
@@ -56,8 +56,6 @@ const MarketingHelpForm = () => {
       if (!response.ok) throw new Error(data.message || "Submission failed");
 
       Alert.alert("Success", "Request submitted successfully!");
-      navigation.navigate("PaymentScreen", { requestId: data.newHelp._id });
-
     } catch (error) {
       Alert.alert("Error", error.message || "Network Error");
     }
@@ -94,7 +92,7 @@ const MarketingHelpForm = () => {
         <Picker.Item label="Net Banking" value="Net Banking" />
       </Picker>
 
-      <Button title="Proceed to Payment" onPress={handleSubmit} />
+      <Button title="Submit Request" onPress={handleSubmit} />
     </View>
   );
 };
